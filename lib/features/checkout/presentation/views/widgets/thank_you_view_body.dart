@@ -1,3 +1,6 @@
+import 'package:checkout_payment_app/features/checkout/presentation/views/widgets/custom_check_icon.dart';
+import 'package:checkout_payment_app/features/checkout/presentation/views/widgets/custom_dashed_line.dart';
+import 'package:checkout_payment_app/features/checkout/presentation/views/widgets/thank_you_card.dart';
 import 'package:flutter/material.dart';
 
 class ThankYouViewBody extends StatelessWidget {
@@ -10,32 +13,12 @@ class ThankYouViewBody extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          Container(
-            decoration: ShapeDecoration(
-              color: Color(0xffD9D9D9),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ),
+          ThankYouCard(),
           Positioned(
             bottom: MediaQuery.sizeOf(context).height * 0.2 + 20,
             left: 20 + 8,
             right: 20 + 8,
-            child: Row(
-              children: List.generate(
-                30,
-                (index) => Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2),
-                    child: Container(
-                      color: Color(0xffB8B8B8),
-                      height: 2,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            child: const CustomDashedLine(),
           ),
           Positioned(
             left: -20,
@@ -51,26 +34,15 @@ class ThankYouViewBody extends StatelessWidget {
               backgroundColor: Colors.white,
             ),
           ),
-          Positioned(
+          const Positioned(
             left: 0,
             right: 0,
             top: -50,
-            child: CircleAvatar(
-              backgroundColor: Color(0xffD9D9D9),
-              radius: 50,
-              child: CircleAvatar(
-                backgroundColor: Color(0xff34A853),
-                radius: 40,
-                child: Icon(
-                  Icons.check,
-                  color: Colors.white,
-                  size: 70,
-                ),
-              ),
-            ),
+            child: CustomCheckIcon(),
           ),
         ],
       ),
     );
   }
 }
+
