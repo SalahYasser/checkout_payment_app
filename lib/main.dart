@@ -1,5 +1,4 @@
 import 'package:checkout_payment_app/features/checkout/presentation/views/my_cart_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +10,8 @@ class CheckoutApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: MyCartView(),
     );
   }
