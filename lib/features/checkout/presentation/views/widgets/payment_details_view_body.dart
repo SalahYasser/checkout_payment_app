@@ -7,8 +7,33 @@ class PaymentDetailsViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Column(
-      children: [PaymentMethodItem(isActive: false)],
+      children: [PaymentMethodListView()],
     );
   }
 }
 
+class PaymentMethodListView extends StatelessWidget {
+  const PaymentMethodListView({super.key});
+
+  final List<String> paymentMethodItems = const [
+    'assets/images/credit_card.svg',
+    'assets/images/paypal.svg'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 60,
+      child: ListView.builder(
+        itemCount: paymentMethodItems.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return PaymentMethodItem(
+            isActive: false,
+            image: paymentMethodItems[index],
+          );
+        },
+      ),
+    );
+  }
+}
