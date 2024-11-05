@@ -1,8 +1,8 @@
 import 'package:checkout_payment_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class OrderInfoItem extends StatelessWidget {
-  const OrderInfoItem({super.key, required this.title, required this.value});
+class CartInfoItem extends StatelessWidget {
+  const CartInfoItem({super.key, required this.title, required this.value});
 
   final String title, value;
 
