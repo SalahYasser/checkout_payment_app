@@ -13,7 +13,7 @@ class MyCartViewBody extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 18),
-          Image.asset('assets/images/basket.png'),
+          Expanded(child: Image.asset('assets/images/basket.png')),
           const SizedBox(height: 25),
           const CartInfoItem(title: 'Order Subtotal', value: r'$42.97'),
           const SizedBox(height: 3),
@@ -26,9 +26,9 @@ class MyCartViewBody extends StatelessWidget {
             color: Color(0xffC7C7C7),
           ),
           const TotalPrice(title: 'Total', value: r'$50.97'),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           const CustomButton(),
-          const SizedBox(height: 12),
+          const SizedBox(height: 100),
         ],
       ),
     );
