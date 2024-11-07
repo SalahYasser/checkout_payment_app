@@ -7,9 +7,7 @@ import 'package:dio/dio.dart';
 
 class CheckoutRepoImpl extends CheckoutRepo {
 
-  final StripeService stripeService;
-
-  CheckoutRepoImpl(this.stripeService);
+  final StripeService stripeService = StripeService();
 
   @override
   Future<Either<Failure, void>> makePayment(
