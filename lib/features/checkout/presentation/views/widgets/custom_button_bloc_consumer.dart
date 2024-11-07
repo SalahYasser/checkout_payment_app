@@ -17,19 +17,19 @@ class CustomButtonBlocConsumer extends StatelessWidget {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) {
-                return ThankYouView();
+                return const ThankYouView();
               },
             ),
           );
         }
         if (state is PaymentFailure) {
+          Navigator.of(context).pop();
           return customSnackBar(context, state.errMessage);
         }
       },
       builder: (context, state) {
         return CustomButton(
           onTap: () {
-
             PaymentIntentInputModel paymentIntentInputModel =
                 PaymentIntentInputModel(amount: '100', currency: 'USD');
 

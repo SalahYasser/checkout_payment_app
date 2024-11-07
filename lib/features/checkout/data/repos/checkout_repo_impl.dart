@@ -16,6 +16,7 @@ class CheckoutRepoImpl extends CheckoutRepo {
       await StripeService().makePayment(paymentIntentInputModel: paymentIntentInputModel);
 
       return right(null);
+
     } on Exception catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));
