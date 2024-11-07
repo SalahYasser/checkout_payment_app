@@ -45,4 +45,3 @@ class ThankYouViewBody extends StatelessWidget {
     );
   }
 }
-
