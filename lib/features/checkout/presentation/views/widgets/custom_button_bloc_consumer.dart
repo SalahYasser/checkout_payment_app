@@ -1,5 +1,6 @@
 import 'package:checkout_payment_app/core/utils/help_functions/custom_snack_bar.dart';
 import 'package:checkout_payment_app/core/widgets/custom_button.dart';
+import 'package:checkout_payment_app/features/checkout/data/models/payment_intent_input_model.dart';
 import 'package:checkout_payment_app/features/checkout/presentation/manger/cubit/payment_cubit.dart';
 import 'package:checkout_payment_app/features/checkout/presentation/views/thank_you_view.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,14 @@ class CustomButtonBlocConsumer extends StatelessWidget {
       },
       builder: (context, state) {
         return CustomButton(
+          onTap: () {
+
+            PaymentIntentInputModel paymentIntentInputModel =
+                PaymentIntentInputModel(amount: '100', currency: 'USD');
+
+            BlocProvider.of<PaymentCubit>(context)
+                .makePayment(paymentIntentInputModel: paymentIntentInputModel);
+          },
           isLoading: state is PaymentLoading ? true : false,
           text: 'Continue',
         );
