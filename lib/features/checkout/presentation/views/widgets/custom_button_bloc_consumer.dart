@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:checkout_payment_app/core/utils/api_keys.dart';
 import 'package:checkout_payment_app/core/utils/help_functions/custom_snack_bar.dart';
 import 'package:checkout_payment_app/core/widgets/custom_button.dart';
 import 'package:checkout_payment_app/features/checkout/data/models/amount_model/amount_model.dart';
@@ -47,7 +48,7 @@ class CustomButtonBlocConsumer extends StatelessWidget {
 
             var transactionData = getTransactionData();
 
-            exceutePaypalPayment(context, transactionData);
+            executePaypalPayment(context, transactionData);
           },
           isLoading: state is PaymentLoading ? true : false,
           text: 'Continue',
@@ -56,13 +57,13 @@ class CustomButtonBlocConsumer extends StatelessWidget {
     );
   }
 
-  void exceutePaypalPayment(BuildContext context, ({AmountModel amount, ItemListModel itemList}) transactionData) {
+  void executePaypalPayment(BuildContext context, ({AmountModel amount, ItemListModel itemList}) transactionData) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => PaypalCheckoutView(
           sandboxMode: true,
-          clientId: "YOUR CLIENT ID",
-          secretKey: "YOUR SECRET KEY",
+          clientId: ApiKeys.clientId,
+          secretKey: ApiKeys.paypalSecretKay,
           transactions: [
             {
               "amount": transactionData.amount.toJson(),
