@@ -17,8 +17,14 @@ class CheckoutApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.grey[400]),
+      // theme: ThemeData(scaffoldBackgroundColor: Colors.grey[400]),
       home: MyCartView(),
     );
   }
 }
+
+
+// PaymentIntentModel create payment intent(amount , currency , customerId)
+// keySecret createEphemeralKey( customerId)
+// initPaymentSheet (merchantDisplayName , intentClientSecret , ephemeralKeySecret)
+// presentPaymentSheet()
