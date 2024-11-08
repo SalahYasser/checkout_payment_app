@@ -45,61 +45,9 @@ class CustomButtonBlocConsumer extends StatelessWidget {
             // BlocProvider.of<PaymentCubit>(context)
             //     .makePayment(paymentIntentInputModel: paymentIntentInputModel);
 
-            var amount = AmountModel(
-              total: "100",
-              currency: "USD",
-              details: Details(
-                subtotal: "100",
-                shipping: "0",
-                shippingDiscount: 0,
-              ),
-            );
+            var transactionData = getTransactionData();
 
-
-            List<OrderItemModel> orders = [
-              OrderItemModel(
-                  name: "Apple",
-                  quantity: 10,
-                  price: "4",
-                  currency: "USD"
-              ),
-
-              OrderItemModel(
-                  name: "Apple",
-                  quantity: 12,
-                  price: "5",
-                  currency: "USD"
-              ),
-            ];
-
-            var itemList = ItemListModel(orders: orders);
-
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => PaypalCheckoutView(
-                sandboxMode: true,
-                clientId: "YOUR CLIENT ID",
-                secretKey: "YOUR SECRET KEY",
-                transactions: [
-                  {
-                    "amount": amount.toJson(),
-                    "description": "The payment transaction description.",
-                    "item_list": itemList.toJson(),
-                  }
-                ],
-                note: "Contact us for any questions on your order.",
-                onSuccess: (Map params) async {
-                  log("onSuccess: $params");
-                  Navigator.pop(context);
-                },
-                onError: (error) {
-                  log("onError: $error");
-                  Navigator.pop(context);
-                },
-                onCancel: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ));
+            exceutePaypalPayment(context, transactionData);
           },
           isLoading: state is PaymentLoading ? true : false,
           text: 'Continue',
@@ -107,6 +55,56 @@ class CustomButtonBlocConsumer extends StatelessWidget {
       },
     );
   }
-}
 
-// 2023-08-16
+  void exceutePaypalPayment(BuildContext context, ({AmountModel amount, ItemListModel itemList}) transactionData) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => PaypalCheckoutView(
+          sandboxMode: true,
+          clientId: "YOUR CLIENT ID",
+          secretKey: "YOUR SECRET KEY",
+          transactions: [
+            {
+              "amount": transactionData.amount.toJson(),
+              "description": "The payment transaction description.",
+              "item_list": transactionData.itemList.toJson(),
+            }
+          ],
+          note: "Contact us for any questions on your order.",
+          onSuccess: (Map params) async {
+            log("onSuccess: $params");
+            Navigator.pop(context);
+          },
+          onError: (error) {
+            log("onError: $error");
+            Navigator.pop(context);
+          },
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
+  }
+
+  ({AmountModel amount, ItemListModel itemList}) getTransactionData() {
+    var amount = AmountModel(
+      total: "100",
+      currency: "USD",
+      details: Details(
+        subtotal: "100",
+        shipping: "0",
+        shippingDiscount: 0,
+      ),
+    );
+
+    List<OrderItemModel> orders = [
+      OrderItemModel(name: "Apple", quantity: 10, price: "4", currency: "USD"),
+      OrderItemModel(name: "Apple", quantity: 12, price: "5", currency: "USD"),
+    ];
+
+    var itemList = ItemListModel(orders: orders);
+
+    return (amount: amount, itemList: itemList);
+  }
+}
