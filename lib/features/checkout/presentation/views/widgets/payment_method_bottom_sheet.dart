@@ -22,4 +22,3 @@ class PaymentMethodBottomSheet extends StatelessWidget {
     );
   }
 }
-

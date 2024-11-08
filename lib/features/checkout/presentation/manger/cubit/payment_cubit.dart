@@ -5,7 +5,6 @@ import 'package:checkout_payment_app/features/checkout/data/repos/checkout_repo.
 import 'package:meta/meta.dart';
 part 'payment_state.dart';
 
-
 class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit(this.checkoutRepo) : super(PaymentInitial());
 
@@ -13,7 +12,6 @@ class PaymentCubit extends Cubit<PaymentState> {
 
   Future makePayment(
       {required PaymentIntentInputModel paymentIntentInputModel}) async {
-
     emit(PaymentLoading());
 
     var data = await checkoutRepo.makePayment(
@@ -29,12 +27,9 @@ class PaymentCubit extends Cubit<PaymentState> {
     );
   }
 
-
-
   @override
   void onChange(Change<PaymentState> change) {
     log(change.toString());
     super.onChange(change);
   }
 }
-

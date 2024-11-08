@@ -6,17 +6,16 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 class CheckoutRepoImpl extends CheckoutRepo {
-
   final StripeService stripeService = StripeService();
 
   @override
   Future<Either<Failure, void>> makePayment(
       {required PaymentIntentInputModel paymentIntentInputModel}) async {
     try {
-      await StripeService().makePayment(paymentIntentInputModel: paymentIntentInputModel);
+      await StripeService()
+          .makePayment(paymentIntentInputModel: paymentIntentInputModel);
 
       return right(null);
-
     } on Exception catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioException(e));
