@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:checkout_payment_app/core/utils/api_keys.dart';
-import 'package:checkout_payment_app/core/utils/help_functions/custom_snack_bar.dart';
+import 'package:checkout_payment_app/core/utils/functions/custom_snack_bar.dart';
 import 'package:checkout_payment_app/core/widgets/custom_button.dart';
 import 'package:checkout_payment_app/features/checkout/data/models/amount_model/amount_model.dart';
 import 'package:checkout_payment_app/features/checkout/data/models/amount_model/details.dart';

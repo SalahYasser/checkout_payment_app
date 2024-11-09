@@ -1,4 +1,4 @@
-import 'package:checkout_payment_app/core/utils/help_functions/buildAppBar.dart';
+import 'package:checkout_payment_app/core/utils/functions/buildAppBar.dart';
 import 'package:checkout_payment_app/features/checkout/presentation/views/widgets/payment_details_view_body.dart';
 import 'package:flutter/material.dart';
 
