@@ -49,9 +49,12 @@ class CustomButtonBlocConsumer extends StatelessWidget {
             var transactionData = getTransactionData();
 
             executePaypalPayment(context, transactionData);
+
           },
+
           isLoading: state is PaymentLoading ? true : false,
           text: 'Continue',
+
         );
       },
     );
