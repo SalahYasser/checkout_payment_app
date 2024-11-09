@@ -1,17 +1,11 @@
-import 'dart:developer';
-
-import 'package:checkout_payment_app/core/utils/api_keys.dart';
 import 'package:checkout_payment_app/core/utils/functions/custom_snack_bar.dart';
+import 'package:checkout_payment_app/core/utils/functions/execute_paypal_payment.dart';
+import 'package:checkout_payment_app/core/utils/functions/get_transaction_data.dart';
 import 'package:checkout_payment_app/core/widgets/custom_button.dart';
-import 'package:checkout_payment_app/features/checkout/data/models/amount_model/amount_model.dart';
-import 'package:checkout_payment_app/features/checkout/data/models/amount_model/details.dart';
-import 'package:checkout_payment_app/features/checkout/data/models/item_list_model/item.dart';
-import 'package:checkout_payment_app/features/checkout/data/models/item_list_model/item_list_model.dart';
 import 'package:checkout_payment_app/features/checkout/presentation/manger/cubit/payment_cubit.dart';
 import 'package:checkout_payment_app/features/checkout/presentation/views/thank_you_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 
 class CustomButtonBlocConsumer extends StatelessWidget {
   const CustomButtonBlocConsumer({super.key});
@@ -60,55 +54,5 @@ class CustomButtonBlocConsumer extends StatelessWidget {
     );
   }
 
-  void executePaypalPayment(BuildContext context, ({AmountModel amount, ItemListModel itemList}) transactionData) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (BuildContext context) => PaypalCheckoutView(
-          sandboxMode: true,
-          clientId: ApiKeys.clientId,
-          secretKey: ApiKeys.paypalSecretKay,
-          transactions: [
-            {
-              "amount": transactionData.amount.toJson(),
-              "description": "The payment transaction description.",
-              "item_list": transactionData.itemList.toJson(),
-            }
-          ],
-          note: "Contact us for any questions on your order.",
-          onSuccess: (Map params) async {
-            log("onSuccess: $params");
-            Navigator.pop(context);
-          },
-          onError: (error) {
-            log("onError: $error");
-            Navigator.pop(context);
-          },
-          onCancel: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-    );
-  }
 
-  ({AmountModel amount, ItemListModel itemList}) getTransactionData() {
-    var amount = AmountModel(
-      total: "100",
-      currency: "USD",
-      details: Details(
-        subtotal: "100",
-        shipping: "0",
-        shippingDiscount: 0,
-      ),
-    );
-
-    List<OrderItemModel> orders = [
-      OrderItemModel(name: "Apple", quantity: 10, price: "4", currency: "USD"),
-      OrderItemModel(name: "Apple", quantity: 12, price: "5", currency: "USD"),
-    ];
-
-    var itemList = ItemListModel(orders: orders);
-
-    return (amount: amount, itemList: itemList);
-  }
 }
