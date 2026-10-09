@@ -4,3 +4,4 @@ macos/** linguist-vendored
 linux/** linguist-vendored
 windows/** linguist-vendored
 web/** linguist-vendored
+lib/inAppWebView.swift linguist-vendored
